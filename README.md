@@ -9,13 +9,26 @@ Built with Java using the libraries:
   
 ## Installation
 
-Prerequisites: 
-  - Java 8 Installed
+Required for use:
+  - Docker 
 
 ## Usage
 
-Run the pre-built jar file with dependiences included. 
+### Running with docker
 
+Build:
+```docker
+docker build -t hackernews .
+```
+Run:
+```docker
+docker run -it hackernews --posts X // where X is the number of posts 
+```
+
+----
+
+###### For Local use:
+Alternative way to run the program on local machine with Java JRE
 ```java
 java -jar hackernews.jar --posts X // where X is the number of posts 
 ```

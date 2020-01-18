@@ -4,6 +4,7 @@ import com.beust.jcommander.JCommander;
 import com.beust.jcommander.Parameter;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
 import com.gargoylesoftware.htmlunit.ElementNotFoundException;
 import com.gargoylesoftware.htmlunit.FailingHttpStatusCodeException;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -46,12 +47,12 @@ public class Main {
 
 			for (int i = 0; i < posts; i++) {
 
+				// check if move to next page is required
 				if (i >= 30) {
 					i = 0;
 					posts -= 30;
 					pagination++;
 					page = client.getPage(baseUrl + "news?p=" + pagination);
-					System.out.println("TESSSTTTT ----- " + baseUrl + "news?p=" + pagination);
 					items = (List<HtmlElement>) page.getByXPath("//tr[contains(@class, 'athing')]");
 				}
 
@@ -140,6 +141,7 @@ public class Main {
 	public void printJSON(Post post) throws JsonProcessingException {
 
 		ObjectMapper mapper = new ObjectMapper();
+		mapper.enable(SerializationFeature.INDENT_OUTPUT);
 		String jsonString = mapper.writeValueAsString(post);
 		System.out.println(jsonString);
 	}
